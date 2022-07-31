@@ -1,0 +1,8 @@
+{
+  "ServerIP": "34.72.162.7",
+  "ServerPort": 3333,
+  "EthGateway": "https://mainnet.infura.io/EXAMPLE",
+  "HLI": "k51qzi5uqu5dknzcklexyqi8kfhfy8oh8ai7tinrlaa0m6sm6hk1mwangfnafn",
+  "PassW": "REQUEST",
+  "ServerAddr": "/ip4/34.72.162.7/tcp/4001/p2p/12D3KooWMvWgHngwcyo6KfkAdkbc6Bi4JMRhU6QEFS51iAx3nDop"
+}
