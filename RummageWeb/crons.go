@@ -18,7 +18,7 @@ import (
 func RunCrons(options string, corpusDir string, crawlfile string) {
 	if options == "all" {
 		log.Println("Runcrons(): Running loadCorpus for directory:" + corpusDir + " and try to put in crawlCIDfile:" + crawlfile)
-		//go loadCorpus(corpusDir, crawlfile)
+		go loadCorpus(corpusDir, crawlfile)
 		go crawlCron(crawlfile)
 	}
 }
@@ -26,7 +26,7 @@ func RunCrons(options string, corpusDir string, crawlfile string) {
 func loadCorpus(corpusDir string, crawlRequestFile string) error {
 	if _, err := os.Stat(corpusDir); os.IsNotExist(err) {
 		return err
-	} //if _, err := os.Stat(corpusDir); !os.IsNotExist(err) {path/to/whatever exists}
+	} // if _, err := os.Stat(corpusDir); !os.IsNotExist(err) {path/to/whatever exists}
 	if _, err := os.Stat(crawlRequestFile); os.IsNotExist(err) {
 		if _, err := os.Create(crawlRequestFile); err != nil {
 			return err
@@ -59,7 +59,7 @@ func crawlCron(crawlRequestFile string) error {
 	src := crawlRequestFile
 	file, err := os.Open(src)
 	if err != nil {
-		log.Println("Crawl File couldn't be accessed: " + src + "with error: " + err.Error()) //log.Fatal(err)
+		log.Println("Crawl File couldn't be accessed: " + src + "with error: " + err.Error()) // log.Fatal(err)
 		return err
 	}
 	defer file.Close()
@@ -72,13 +72,13 @@ func crawlCron(crawlRequestFile string) error {
 		go Rummage.DoCrawlServer(CID, "CID")
 	}
 	if err := scanner.Err(); err != nil {
-		log.Println("Crawl process failed for: " + src + "with error: " + err.Error()) //log.Fatal(err)
+		log.Println("Crawl process failed for: " + src + "with error: " + err.Error()) // log.Fatal(err)
 		return err
 	}
-	//rename crawlCID.txt to crawlCID.txt.datetimenow
+	// rename crawlCID.txt to crawlCID.txt.datetimenow
 	dst := src + "." + (time.Now().Format("01-02-2006-15-04-05"))
 	if err := os.Rename(src, dst); err != nil {
-		log.Println("File renaming failed for " + src + "with error: " + err.Error()) //log.Fatal(err)
+		log.Println("File renaming failed for " + src + "with error: " + err.Error()) // log.Fatal(err)
 		return err
 	}
 	return nil
@@ -130,7 +130,7 @@ func fileList(root string) (files []string, err error) {
 				files = append(files, file)
 			}
 		}
-		//info.Name() carries the file name only without the path
+		// info.Name() carries the file name only without the path
 		if !info.IsDir() && (filepath.Ext(path) != ".zip") {
 			log.Println("fileList(): Adding file:" + path)
 			files = append(files, path)
@@ -156,6 +156,7 @@ func LinesFromReader(r io.Reader) ([]string, error) {
 
 	return lines, nil
 }
+
 func InsertStringToFile(path, str string, index int) error {
 	lines, err := File2lines(path)
 	if err != nil {
