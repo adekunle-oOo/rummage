@@ -16,6 +16,9 @@ import (
 )
 
 func RunCrons(options string, corpusDir string, crawlfile string) {
+	if options == "testing" {
+		go testing()
+	}
 	if options == "all" {
 		log.Println("Runcrons(): Running loadCorpus for directory:" + corpusDir + " and try to put in crawlCIDfile:" + crawlfile)
 		go loadCorpus(corpusDir, crawlfile)
