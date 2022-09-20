@@ -23,6 +23,7 @@ func RunCrons(options string, corpusDir string, crawlfile string) {
 		log.Println("Runcrons(): Running loadCorpus for directory:" + corpusDir + " and try to put in crawlCIDfile:" + crawlfile)
 		go loadCorpus(corpusDir, crawlfile)
 		go crawlCron(crawlfile)
+		log.Println("Job successfully started")
 	}
 }
 
